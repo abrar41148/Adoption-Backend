@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
 
+/* General body styling */
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #0d0d2b, #000000);
@@ -8,6 +9,7 @@ body {
     padding: 2rem;
 }
 
+/* Container for the whole page */
 .container {
     display: flex;
     justify-content: space-between;
@@ -15,6 +17,7 @@ body {
     flex-wrap: nowrap;
 }
 
+/* Form container for adding/updating foster-home */
 .form-container {
     background: linear-gradient(145deg,#000000, #1a1a3a);
     padding: 2rem;
@@ -34,6 +37,7 @@ body {
     border-color: #ffffff;
 }
 
+/* Title for form */
 .form-container h2 {
     font-family: 'Playfair Display', serif;
     text-align: center;
@@ -42,6 +46,7 @@ body {
     color: #ffffff;
 }
 
+/* Form layout */
 .form-container form {
     width: 100%;
     display: flex;
@@ -49,6 +54,7 @@ body {
     align-items: center;
 }
 
+/* Input fields */
 .form-container input[type="text"],
 .form-container input[type="number"],
 .form-container input[type="submit"] {
@@ -75,39 +81,40 @@ input[type="submit"]:hover {
     background-color: #666;
 }
 
-.pet-list-container {
+/* foster-home list container */
+.foster-home-list-container {
     width: 65%;
     height: 87vh;
     overflow-y: auto;
     padding: 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem;
     border-radius: 16px;
     background: linear-gradient(145deg,#000000, #1a1a3a);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
     justify-content: flex-start;
 }
 
-.pet-card {
+/* Individual foster-home cards */
+.foster-home-card {
     background: linear-gradient(145deg,#252547, #0d1b2a);
     padding: 1rem;
-    margin: 0;
     border-radius: 12px;
-    box-shadow: 0 3px 6px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     min-width: 250px;
     flex: 1 1 300px;
-    height: 250px;
+    height: 275px;
     transition: transform 0.2s ease, border-left 0.3s ease;
     color: #eaeaea;
 }
 
-.pet-card:hover {
+.foster-home-card:hover {
     transform: translateY(-5px);
     border-left: 6px solid #4db8ff;
 }
 
-.pet-id {
+.foster-home-id {
     text-align: center;
     font-weight: bold;
     font-size: 1.05rem;
@@ -115,62 +122,22 @@ input[type="submit"]:hover {
     color: #fff;
 }
 
-.pet-card p {
+.foster-home-card p {
     margin: 0.3rem 0;
 }
 
-.pet-card a {
-    color: #d0d0d0;
-    font-weight: bold;
-    margin-right: 1rem;
-    text-decoration: none;
-}
-
-.pet-card a:hover {
+.foster-home-card a:hover {
     text-decoration: underline;
 }
 
+/* Separator line */
 hr {
     border: none;
     border-top: 1px dashed #777;
     margin: 2rem 0;
 }
 
-h2 {
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    color: #fff;
-}
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .form-container {
-        width: 80%;
-    }
-
-    .pet-list-container {
-        width: 100%;
-    }
-}
-
-footer {
-    font-size: 0.8rem;
-    font-style: italic;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 0;
-    opacity: 100%;
-    color: #999;
-    margin: 0;
-}
-
+/* Action buttons for edit and delete */
 .action-buttons {
     display: flex;
     justify-content: center;
@@ -181,7 +148,6 @@ footer {
 .action-buttons a {
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    font-size: 0.9rem;
     font-size: 0.9rem;
     text-decoration: none;
     font-weight: 500;
@@ -207,4 +173,35 @@ footer {
 .action-buttons a.delete-btn:hover {
     background-color: #400;
     transform: scale(1.05);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-container {
+        width: 80%;
+    }
+
+    .foster-home-list-container {
+        width: 100%;
+    }
+}
+
+/* Footer styling */
+footer {
+    font-size: 0.8rem;
+    font-style: italic;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    opacity: 100%;
+    color: #999;
+    margin: 0;
 }

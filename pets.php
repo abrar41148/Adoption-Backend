@@ -92,23 +92,9 @@ if (isset($_GET['delete'])) {
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    // Get the adoption status
                     $adoption_status = $row["adoption_status"];
 
-                    // Determine the background color based on adoption status
-                    if ($adoption_status == 'Adopted') {
-                        $bg_color = '#faa5de '; // Soft reddish color for Adopted
-                    } elseif ($adoption_status == 'Available') {
-                        $bg_color = '#c5f79e'; // Soft green color for Available
-                    } elseif ($adoption_status == 'Pending') {
-                        $bg_color = '#fff0c0 '; // Soft yellow color for Pending
-                    } elseif ($adoption_status == 'Fostered') {
-                        $bg_color = '#cdb4db '; // Light purple color for Fostered
-                    } else {
-                        $bg_color = '#ffffff'; // White if no adoption status
-                    }
-
-                    echo "<div class='pet-card' style='background-color: $bg_color;'>
+                    echo "<div class='pet-card'>
                         <p class='pet-id'>ID: " . $row["pet_id"] . "</p>
                         <div class='pet-card-grid'>
                             <p><strong>Name:</strong> " . $row["name"] . "</p>
@@ -119,10 +105,9 @@ if (isset($_GET['delete'])) {
                             <p><strong>Status:</strong> " . ($adoption_status ? $adoption_status : 'N/A') . "</p>
                         </div>
                         <div class='action-buttons'>
-    <a href='pets.php?edit=" . $row["pet_id"] . "' class='edit-btn'>Edit</a>
-    <a href='pets.php?delete=" . $row["pet_id"] . "' class='delete-btn' onclick=\"return confirm('Delete this pet?')\">Delete</a>
-</div>
-
+                            <a href='pets.php?edit=" . $row["pet_id"] . "' class='edit-btn'>Edit</a>
+                            <a href='pets.php?delete=" . $row["pet_id"] . "' class='delete-btn' onclick=\"return confirm('Delete this pet?')\">Delete</a>
+                        </div>
                     </div>";
                 }
             } else {
@@ -133,7 +118,6 @@ if (isset($_GET['delete'])) {
     </div>
 </body>
 <footer>
-   Quick Reference: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Adoption Status 1: Available / 2: Adopted / 3: Pending / 4: Fostered / &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender: 1: Male / 2: Female
+  Pet Management &nbsp;&nbsp;&nbsp; Quick Reference: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Adoption Status 1: Available / 2: Adopted / 3: Pending / 4: Fostered / &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender: 1: Male / 2: Female
 </footer>
-
 </html>
