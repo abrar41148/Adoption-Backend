@@ -43,7 +43,7 @@ if (isset($_GET['delete'])) {
 <html>
 <head>
     <title>Shelter Management</title>
-    <link rel="stylesheet" href="shelters.css">
+    <link rel="stylesheet" href="styles/shelters.css">
 </head>
 <body>
 <div class="container">

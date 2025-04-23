@@ -44,61 +44,76 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Management</title>
+    <link rel="stylesheet" href="styles/employees.css">
 </head>
 <body>
-<?php
-if (isset($_GET['edit'])) {
-    $employee_id = $_GET['edit'];
-    $sql = "SELECT * FROM Employees WHERE employee_id = $employee_id";
-    $result = $conn->query($sql);
-    $employee = $result->fetch_assoc();
-    echo "<h2>Update Employee</h2>
-    <form method='POST'>
-        <input type='hidden' name='employee_id' value='{$employee['employee_id']}'>
-        <input type='text' name='first_name' value='{$employee['first_name']}' placeholder='First Name' required><br>
-        <input type='text' name='last_name' value='{$employee['last_name']}' placeholder='Last Name' required><br>
-        <input type='text' name='email' value='{$employee['email']}' placeholder='Email' required><br>
-        <input type='text' name='phone' value='{$employee['phone']}' placeholder='Phone' required><br>
-        <input type='text' name='role' value='{$employee['role']}' placeholder='Role' required><br>
-        <input type='number' name='shelter_id' value='{$employee['shelter_id']}' placeholder='Shelter ID' required><br>
-        <input type='submit' value='Update Employee'>
-    </form><hr>";
-} else {
-    echo "<h2>Add New Employee</h2>
-    <form method='POST'>
-        <input type='text' name='first_name' placeholder='First Name' required><br>
-        <input type='text' name='last_name' placeholder='Last Name' required><br>
-        <input type='text' name='email' placeholder='Email' required><br>
-        <input type='text' name='phone' placeholder='Phone' required><br>
-        <input type='text' name='role' placeholder='Role' required><br>
-        <input type='number' name='shelter_id' placeholder='Shelter ID' required><br>
-        <input type='submit' value='Add Employee'>
-    </form><hr>";
-}
-?>
+    <div class="container">
+        <div class="form-container">
+            <?php
+            if (isset($_GET['edit'])) {
+                $employee_id = $_GET['edit'];
+                $sql = "SELECT * FROM Employees WHERE employee_id = $employee_id";
+                $result = $conn->query($sql);
+                $employee = $result->fetch_assoc();
+                echo "<h2>Update Employee</h2>
+                <form method='POST'>
+                    <input type='hidden' name='employee_id' value='{$employee['employee_id']}'>
+                    <input type='text' name='first_name' value='{$employee['first_name']}' placeholder='First Name' required><br>
+                    <input type='text' name='last_name' value='{$employee['last_name']}' placeholder='Last Name' required><br>
+                    <input type='email' name='email' value='{$employee['email']}' placeholder='Email' required><br>
+                    <input type='text' name='phone' value='{$employee['phone']}' placeholder='Phone' required><br>
+                    <input type='text' name='role' value='{$employee['role']}' placeholder='Role' required><br>
+                    <input type='number' name='shelter_id' value='{$employee['shelter_id']}' placeholder='Shelter ID' required><br>
+                    <input type='submit' value='Update Employee'>
+                </form><hr>";
+            } else {
+                echo "<h2>Add New Employee</h2>
+                <form method='POST'>
+                    <input type='text' name='first_name' placeholder='First Name' required><br>
+                    <input type='text' name='last_name' placeholder='Last Name' required><br>
+                    <input type='email' name='email' placeholder='Email' required><br>
+                    <input type='text' name='phone' placeholder='Phone' required><br>
+                    <input type='text' name='role' placeholder='Role' required><br>
+                    <input type='number' name='shelter_id' placeholder='Shelter ID' required><br>
+                    <input type='submit' value='Add Employee'>
+                </form><hr>";
+            }
+            ?>
+        </div>
 
-<h2>Employee List</h2>
-<?php
-$sql = "SELECT * FROM Employees";
-$result = $conn->query($sql);
+        <div class="employee-list-container">
+            <?php
+            $sql = "SELECT * FROM Employees";
+            $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["employee_id"] . "<br>";
-        echo "Name: " . $row["first_name"] . " " . $row["last_name"] . "<br>";
-        echo "Email: " . $row["email"] . "<br>";
-        echo "Phone: " . $row["phone"] . "<br>";
-        echo "Role: " . $row["role"] . "<br>";
-        echo "Shelter ID: " . $row["shelter_id"] . "<br>";
-        echo "<a href='employees.php?edit=" . $row["employee_id"] . "'>Edit</a> | ";
-        echo "<a href='employees.php?delete=" . $row["employee_id"] . "' onclick=\"return confirm('Delete this employee?')\">Delete</a><br><br><hr>";
-    }
-} else {
-    echo "No employees found.";
-}
-?>
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<div class='employee-card'>
+                            <div class='employee-id'>ID: " . $row["employee_id"] . "</div>
+                            <p><strong>Name:</strong> " . $row["first_name"] . " " . $row["last_name"] . "</p>
+                            <p><strong>Email:</strong> " . $row["email"] . "</p>
+                            <p><strong>Phone:</strong> " . $row["phone"] . "</p>
+                            <p><strong>Role:</strong> " . $row["role"] . "</p>
+                            <p><strong>Shelter ID:</strong> " . $row["shelter_id"] . "</p>
+                            <div class='action-buttons'>
+                                <a href='employees.php?edit=" . $row["employee_id"] . "' class='edit-btn'>Edit</a>
+                                <a href='employees.php?delete=" . $row["employee_id"] . "' class='delete-btn' onclick=\"return confirm('Delete this employee?')\">Delete</a>
+                            </div>
+                          </div><hr>";
+                }
+            } else {
+                echo "<p>No employees found.</p>";
+            }
+            ?>
+        </div>
+    </div>
+    <footer>
+        <p>Employee Management</p>
+    </footer>
 </body>
 </html>

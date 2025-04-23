@@ -48,7 +48,7 @@ if (isset($_GET['delete'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adopter Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="adopters.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="styles/adopters.css"> <!-- Link to your CSS file -->
 </head>
 <body>
     <div class="container">

@@ -40,56 +40,74 @@ if (isset($_GET['delete'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adoption Management</title>
+    <link rel="stylesheet" href="styles/adoptions.css">
 </head>
 <body>
-<?php
-if (isset($_GET['edit'])) {
-    $adoption_id = $_GET['edit'];
-    $sql = "SELECT * FROM Adoptions WHERE adoption_id = $adoption_id";
-    $result = $conn->query($sql);
-    $adoption = $result->fetch_assoc();
-    echo "<h2>Update Adoption</h2>
-    <form method='POST'>
-        <input type='hidden' name='adoption_id' value='{$adoption['adoption_id']}'>
-        <input type='number' name='pet_id' value='{$adoption['pet_id']}' placeholder='Pet ID' required><br>
-        <input type='number' name='adopter_id' value='{$adoption['adopter_id']}' placeholder='Adopter ID' required><br>
-        <input type='date' name='adoption_date' value='{$adoption['adoption_date']}' required><br>
-        <input type='text' name='adoption_status' value='{$adoption['adoption_status']}' placeholder='Adoption Status' required><br>
-        <input type='submit' value='Update Adoption'>
-    </form><hr>";
-} else {
-    echo "<h2>Add New Adoption</h2>
-    <form method='POST'>
-        <input type='number' name='pet_id' placeholder='Pet ID' required><br>
-        <input type='number' name='adopter_id' placeholder='Adopter ID' required><br>
-        <input type='date' name='adoption_date' required><br>
-        <input type='text' name='adoption_status' placeholder='Adoption Status' required><br>
-        <input type='submit' value='Add Adoption'>
-    </form><hr>";
-}
-?>
 
-<h2>Adoption Records</h2>
-<?php
-$sql = "SELECT * FROM Adoptions";
-$result = $conn->query($sql);
+<div class="container">
+    <div class="form-container">
+        <?php
+        if (isset($_GET['edit'])) {
+            $adoption_id = $_GET['edit'];
+            $sql = "SELECT * FROM Adoptions WHERE adoption_id = $adoption_id";
+            $result = $conn->query($sql);
+            $adoption = $result->fetch_assoc();
+            echo "<h2>Update Adoption</h2>
+            <form method='POST'>
+                <input type='hidden' name='adoption_id' value='{$adoption['adoption_id']}'>
+                <input type='number' name='pet_id' value='{$adoption['pet_id']}' placeholder='Pet ID' required><br>
+                <input type='number' name='adopter_id' value='{$adoption['adopter_id']}' placeholder='Adopter ID' required><br>
+                <input type='date' name='adoption_date' value='{$adoption['adoption_date']}' required><br>
+                <input type='text' name='adoption_status' value='{$adoption['adoption_status']}' placeholder='Adoption Status' required><br>
+                <input type='submit' value='Update Adoption'>
+            </form><hr>";
+        } else {
+            echo "<h2>Add New Adoption</h2>
+            <form method='POST'>
+                <input type='number' name='pet_id' placeholder='Pet ID' required><br>
+                <input type='number' name='adopter_id' placeholder='Adopter ID' required><br>
+                <input type='date' name='adoption_date' required><br>
+                <input type='text' name='adoption_status' placeholder='Adoption Status' required><br>
+                <input type='submit' value='Add Adoption'>
+            </form><hr>";
+        }
+        ?>
+    </div>
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["adoption_id"] . "<br>";
-        echo "Pet ID: " . $row["pet_id"] . "<br>";
-        echo "Adopter ID: " . $row["adopter_id"] . "<br>";
-        echo "Date: " . $row["adoption_date"] . "<br>";
-        echo "Status: " . $row["adoption_status"] . "<br>";
-        echo "<a href='adoptions.php?edit=" . $row["adoption_id"] . "'>Edit</a> | ";
-        echo "<a href='adoptions.php?delete=" . $row["adoption_id"] . "' onclick=\"return confirm('Delete this record?')\">Delete</a><br><br><hr>";
-    }
-} else {
-    echo "No adoption records found.";
-}
-?>
+    <div class="adoption-list-container">
+        <?php
+        $sql = "SELECT * FROM Adoptions";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<div class='adoption-card'>
+                    <p class='adoption-id'>ID: " . $row["adoption_id"] . "</p>
+                    <p>Pet ID: " . $row["pet_id"] . "</p>
+                    <p>Adopter ID: " . $row["adopter_id"] . "</p>
+                    <p>Date: " . $row["adoption_date"] . "</p>
+                    <p>Status: " . $row["adoption_status"] . "</p>
+                    <div class='action-buttons'>
+                        <a href='adoptions.php?edit=" . $row["adoption_id"] . "' class='edit-btn'>Edit</a>
+                        <a href='adoptions.php?delete=" . $row["adoption_id"] . "' class='delete-btn' onclick=\"return confirm('Delete this record?')\">Delete</a>
+                    </div>
+                </div><hr>";
+            }
+        } else {
+            echo "No adoption records found.";
+        }
+        ?>
+    </div>
+</div>
+
+<footer>
+    <p>Adoption Management</p>
+</footer>
+
 </body>
 </html>

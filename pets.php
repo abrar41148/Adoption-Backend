@@ -48,7 +48,7 @@ if (isset($_GET['delete'])) {
 <head>
     <meta charset="UTF-8">
     <title>Pet Management</title>
-    <link rel="stylesheet" href="pets.css"> <!-- Ensure this is the correct path -->
+    <link rel="stylesheet" href="styles/pets.css"> <!-- Ensure this is the correct path -->
 </head>
 <body>
     <div class="container">
